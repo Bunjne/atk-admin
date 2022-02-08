@@ -3,7 +3,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
-import '../assets/Header.css';
 import { Box, Typography } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
@@ -20,7 +19,7 @@ export default function Header(props: { page: number, setPage: any }) {
 
     const navigate = useNavigate();
     useEffect(() => {
-        navigate('/marketplace')
+        navigate('/mint')
     }, []);
 
     return (
