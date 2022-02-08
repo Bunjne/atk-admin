@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useRef } from 'react';
+import Header from './layouts/header';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Box, CssBaseline } from "@mui/material";
+import Mint from "./routes/Mint";
+import Election from "./routes/Election";
+import NoPage from "./routes/NoPage";
+import MarketPlace from "./routes/Marketplace";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useTheme } from '@mui/system';
+import Themes from './assets/themes';
+import './components/helpers/font.css'
 
-function App() {
+export default function App() {
+  const [page, setPage] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={Themes.appTheme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Box >
+          <Header page={page} setPage={setPage} />
+          <Routes>
+            <Route path="/mint" element={<Mint />} />
+            <Route path="/marketplace" element={<MarketPlace />} />
+            <Route path="/election" element={<Election />} />
+            <Route path="*" element={<NoPage />} />
+          </Routes>
+        </Box>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
-
-export default App;

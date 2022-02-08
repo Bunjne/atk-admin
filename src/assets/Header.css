@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.text-title {
+  margin-left: 2rem;
+  margin-left: 2rem;
+  font-size: 20rem;
+  color: #000000;
+  font-weight: 990;
+}
+.text-selected {
+  margin-left: 2rem;
+  font-size: 20px;
+  color: #280aa5;
+  font-weight: 600;
+}
+
+.text-UnSelected {
+  margin-left: 2rem;
+  font-weight: 600;
+  font-size: 20px;
+  color: #a8a8a8;
+}
