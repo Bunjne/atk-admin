@@ -13,5 +13,7 @@ export interface Token {
 
     description?: string|null;
 
-    price: number
+    price: number;
+
+    priceUpdatedAt: string;
 }

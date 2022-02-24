@@ -32,13 +32,18 @@ export function SearchBar({ options, selectedOption, onOptionChanged, userAddres
                 inputRef={userAddressQueryRef}
                 inputProps={{
                     style: {
-                        paddingLeft: "1rem", height: '0.45rem'
+                        paddingLeft: "1rem", height: '0.44rem'
                     },
                 }}
-                sx={{ ml: '5rem', mr: "1rem", width: "53rem" }}
+                sx={{ mr: "1rem", width: "0.77" }}
             />
             <TextFieldCustom
-                sx={{ '& > :not(style)': { width: '15rem', height: '2.5rem', fontSize: "1rem" } }}
+                sx={{ width: '0.205', fontSize: "1rem" }}
+                InputProps={{
+                    style: {
+                        height: '2.5rem'
+                    }
+                }}
                 select
                 value={selectedOption}
                 onChange={onOptionChanged}
@@ -52,7 +57,7 @@ export function SearchBar({ options, selectedOption, onOptionChanged, userAddres
         </Grid>
         <Grid item>
             <ColorButton variant="contained" onClick={onSearchClicked}
-                sx={{ flex: 1, pl: "1.5rem", pr: "1.5rem", fontWeight: 600 }}>
+                sx={{ flex: 1, pl: "1rem", pr: "1.5rem", fontWeight: 600 }}>
                 SEARCH
             </ColorButton>
         </Grid>
@@ -75,14 +80,32 @@ export const TitleListRectangle = () => (
 
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={8}
+        width={6}
         viewBox="0 0 8 40"
     >
         <rect
             id="Rectangle_85"
             data-name="Rectangle 85"
-            width={8}
+            width={6}
             height={40}
+            rx={2}
+            fill="#280aa5"
+        />
+    </svg>
+);
+
+export const LargeTitleListRectangle = () => (
+
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={6}
+        viewBox="0 0 8 40"
+    >
+        <rect
+            id="Rectangle_85"
+            data-name="Rectangle 85"
+            width={6}
+            height={45}
             rx={2}
             fill="#280aa5"
         />

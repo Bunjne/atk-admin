@@ -10,6 +10,13 @@ export const BaseLine = styled("div")({
     borderStyle: "solid"
 })
 
+export const ItemBaseLine = styled(Grid)({
+    border: lineWidth,
+    borderColor: Colors.BorderLine,
+    borderStyle: "solid",
+    borderBottomWidth: 0
+})
+
 export const BoxBorder = styled(Grid)({
     border: lineWidth,
     borderColor: Colors.BorderLine,

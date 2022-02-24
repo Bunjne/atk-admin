@@ -7,7 +7,7 @@ export default class Colors {
 
     static SecondaryColor = "#a8a8a8";
 
-    static Black = "#000000";
+    static Black = "#1D1D1D";
     
     static White = "#ffffff";
 
@@ -16,4 +16,6 @@ export default class Colors {
     static LightSecondaryColor = '#E8E8E8';
 
     static Red = "#BB2432";
+
+    static Yellow = "#FFB52B";
 }

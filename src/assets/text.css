@@ -1,0 +1,8 @@
+.max-lines-ellipsis {
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}

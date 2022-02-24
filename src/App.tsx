@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import Header from './layouts/header';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Box, CssBaseline } from "@mui/material";
@@ -7,15 +7,14 @@ import Election from "./routes/Election";
 import NoPage from "./routes/NoPage";
 import MarketPlace from "./routes/Marketplace";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useTheme } from '@mui/system';
 import Themes from './assets/themes';
 import './components/helpers/font.css'
 
 export default function App() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = React.useState(0);
 
   return (
-    <ThemeProvider theme={Themes.appTheme}>
+    <ThemeProvider theme={Themes.AppTheme}>
       <CssBaseline />
       <BrowserRouter>
         <Box >

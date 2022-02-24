@@ -19,7 +19,15 @@ export interface Privilege {
 
     lifeTimeInDay?: number | null;
 
-    imageUrl?: string | null;
+    imageUrl?: string;
 
     imageName?: string | null;
+
+    maxSupplyText?: string;
+    
+    expiryText?: string;
+
+    amountPerStudentText?: string;
+
+    isDeleted: boolean;
 }

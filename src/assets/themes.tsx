@@ -52,7 +52,7 @@ export default class Themes {
         }
     })
 
-    static appTheme = createTheme({
+    static AppTheme = createTheme({
         palette: {
             primary: {
                 main: Colors.PrimaryColor
@@ -62,7 +62,7 @@ export default class Themes {
             }
         },
         typography: {
-            fontFamily: "Bariol"
+            fontFamily: "Bariol",
         },
         components: {
             MuiButtonBase: {
@@ -73,6 +73,7 @@ export default class Themes {
             MuiCssBaseline: {
                 styleOverrides: { appFonts }
             },
+            
         },
     })
 }

@@ -19,7 +19,7 @@ export default function CoinInfoItem(props: Props) {
                 <img src={image} width={14} height={14} />
                 <Typography color='#8E8E93' fontSize="0.8rem">{title}</Typography>
             </Stack>
-            <Typography textAlign="end" sx={{ fontSize: "1rem", fontWeight: 600 }}>{tokenPrice}</Typography>
+            <Typography textAlign="end" sx={{ fontSize: "1rem", fontWeight: 600, fontFamily:"Bariol Serif" }}>{tokenPrice}</Typography>
         </Stack>
     );
 }
