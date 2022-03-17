@@ -84,19 +84,29 @@ const Mint = () => {
 
   function mintTokens(key: number) {
     setMinting({ isMinting: true, mintKey: key });
-    const mintType = { mintType: GetMintType(key) }
+    const mintType = GetMintType(key)
+    let url = '';
+    if (mintType === MintType.VOTE) {
+      url = `/mints/${mintType}`;
+    } else if (mintType === MintType.LECTURER) {
+      url = `/mints/${mintType}?semesterYear=2/2022`;
+    } else if (mintType === MintType.SEMESTERLY) {
+      url = `/mints/${mintType}?gradeSemesterYear=1/2022&tuitionSemesterYear=2/2022`
+    } else if (mintType === MintType.ORGANIZATION) {
+      url = `/mints/${mintType}`
+    }
 
-    if (GetMintType(key) === MintType.VOTE) {
-      axiosHelper.post(`/tokens/mint/vote`, mintType)
+    axiosHelper.post(url)
       .then(function (response) {
         const apiResponse: APIResponse = response.data;
         console.log(apiResponse.data);
         setMinting({ isMinting: false, mintKey: key });
       })
       .catch((err: Error | AxiosError) => {
+        alert(err.message);
+        setMinting({ isMinting: false, mintKey: key });
         console.log(err);
       })
-    }
   }
 
   function getTokens() {
@@ -141,6 +151,10 @@ const Mint = () => {
     return () => clearInterval(interval);
   }, [])
 
+  useEffect(() => {
+    getTokens()
+  }, [isMinting])
+
   return (
     <Box sx={{ width: 1, p: "1.875rem", pt: "1.5rem" }}>
       {ACAIsLoading || LIFIsLoading ?
@@ -167,6 +181,8 @@ const Mint = () => {
                     <CoinInfoItem title="BURNT" price={ACAToken!.totalSupply - ACAToken!.cirCulationSupply} type="ACA" image={burn} />
                     <ItemBaseLine sx={{ my: '1rem' }} />
                     <CoinInfoItem title="TOTAL MINT" price={ACAToken!.totalSupply} type="ACA" image={mint} />
+                    <ItemBaseLine sx={{ my: '1rem' }} />
+                    <CoinInfoItem title="AVERAGE PER STUDENT WALLET" price={ACAToken!.averagePerWallet ?? 0} type="ACA" image={mint} />
                   </Stack>
                 </BoxBorder>
               </Grid>
@@ -188,6 +204,8 @@ const Mint = () => {
                     <CoinInfoItem title="BURNT" price={LIFToken!.totalSupply - LIFToken!.cirCulationSupply} type="LIF" image={burn} />
                     <ItemBaseLine sx={{ my: '1rem' }} />
                     <CoinInfoItem title="TOTAL MINT" price={LIFToken!.totalSupply} type="LIF" image={mint} />
+                    <ItemBaseLine sx={{ my: '1rem' }} />
+                    <CoinInfoItem title="AVERAGE PER STUDENT WALLET" price={LIFToken!.averagePerWallet ?? 0} type="LIF" image={mint} />
                   </Stack>
                 </BoxBorder>
               </Grid>
@@ -242,14 +260,6 @@ const Mint = () => {
         <Grid xs item>
           <ItemBaseLine />
         </Grid>
-        <MintItem
-          mintKey={4}
-          icon={ActivityMint}
-          title="Activity Unit Token Offering"
-          description="The LIF tokens would be distributed to the activity units for using and organizing
-          their activities."
-          mintTokens={mintTokens}
-          mintState={isMinting} />
       </BoxBorder>
     </Box >
   );

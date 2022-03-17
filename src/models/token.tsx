@@ -4,16 +4,18 @@ export interface Token {
     name: string;
 
     symbol: string;
-     
-    logo?: string|null;
+
+    logo?: string | null;
 
     totalSupply: number;
 
     cirCulationSupply: number;
 
-    description?: string|null;
+    description?: string | null;
 
     price: number;
 
     priceUpdatedAt: string;
+
+    averagePerWallet: number;
 }

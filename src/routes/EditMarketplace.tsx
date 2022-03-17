@@ -246,13 +246,13 @@ function Marketplace({ handleClose, privilege, setAlertStatus }: MarketpalceProp
         const editedPrivilege: Privilege = {
             id: privilege.id,
             name: data.Name,
-            price: data.Price,
+            price: parseInt(data.Price),
             tokenType: coin,
             description: data.Description,
-            lifeTimeInDay: isExpiryEnable ? data.LifeTimeInDay : null,
-            maxSupply: isMaxSupplyEnable ? data.MaxSupply : null,
+            lifeTimeInDay: isExpiryEnable ? parseInt(data.LifeTimeInDay) : null,
+            maxSupply: isMaxSupplyEnable ? parseInt(data.MaxSupply) : null,
             maxSupplyType: isMaxSupplyEnable ? maxSupplyType : null,
-            amountPerStudent: isMaxPerStudentEnable ? data.AmountPerStudent : null,
+            amountPerStudent: isMaxPerStudentEnable ? parseInt(data.AmountPerStudent) : null,
             amountPerStudentType: isMaxPerStudentEnable ? amountPerStudentType : null,
             isDeleted: false
         }
@@ -355,56 +355,27 @@ function Marketplace({ handleClose, privilege, setAlertStatus }: MarketpalceProp
                                         />}
                                 />
                             </Grid>
-                            <Grid item sm container spacing={2}>
-                                <Grid item>
-                                    <TestWithStar title="Price" />
-                                    <Controller
-                                        name="Price"
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field }) =>
-                                            <TextFieldCustom
-                                                {...field}
-                                                onKeyPress={(event) => {
-                                                    if (!/[0-9]/.test(event.key)) {
-                                                        event.preventDefault();
-                                                    }
-                                                }}
-                                                id="price-input"
-                                                size="small"
-                                                placeholder="0"
-                                                value={field.value.toString().replace(/^0+/, '')}
-                                                variant="outlined"
-                                                inputProps={{ style: { textAlign: 'right', width: '9.5rem' } }}
-                                            />}
-                                    />
-                                </Grid>
-                                <Grid item xs alignSelf={"self-end"}>
-                                    <Controller
-                                        name="TokenType"
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field }) =>
-                                            <TextFieldCustom
-                                                {...field}
-                                                sx={{ '& > :not(style)': { height: '2.5rem', fontSize: "1rem" } }}
-                                                id="outlined-select-currency"
-                                                select
-                                                value={coin}
-                                                onChange={handleCoinChange}
-                                                InputProps={{
-                                                    startAdornment: (
-                                                        <Logo coin={coin} />
-                                                    ),
-                                                }}
-                                            >
-                                                {coins.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem>
-                                                ))}
-                                            </TextFieldCustom>}
-                                    />
+                            <Grid item sm container>
+                                <TestWithStar title="Image" />
+                                <Grid item container>
+                                    <label htmlFor="edit-image-button">
+                                        <Input accept="image/*" id="edit-image-button" onChange={handleImageChange} type="file" />
+                                        <Button
+                                            variant="contained"
+                                            component="span"
+                                            startIcon={<img src={InsertImage} width={20} height={20} />}
+                                            sx={{ width: '10rem', height: '2.5rem', fontWeight: 600 }}
+                                        >
+                                            Insert Image
+                                        </Button>
+                                    </label>
+                                    {
+                                        (fileSelected || privilege.imageName) &&
+                                        <Typography color="secondary" ml={2} sx={{ alignSelf: "center" }}>
+                                            {fileSelected?.fileName ? fileSelected?.fileName : privilege.imageName}
+                                            {<img src={CheckCircle} width={12} height={12} />}
+                                        </Typography>
+                                    }
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -544,26 +515,53 @@ function Marketplace({ handleClose, privilege, setAlertStatus }: MarketpalceProp
                         {/* Third row */}
                         <Grid item container spacing={4}>
                             <Grid item sx={{ '& > :not(style)': { width: '40rem' } }}>
-                                <TestWithStar title="Image" />
-                                <Grid item container>
-                                    <label htmlFor="edit-image-button">
-                                        <Input accept="image/*" id="edit-image-button" onChange={handleImageChange} type="file" />
-                                        <Button
-                                            variant="contained"
-                                            component="span"
-                                            startIcon={<img src={InsertImage} width={20} height={20} />}
-                                            sx={{ width: '10rem', height: '2.5rem', fontWeight: 600 }}
-                                        >
-                                            Insert Image
-                                        </Button>
-                                    </label>
-                                    {
-                                        (fileSelected || privilege.imageUrl) &&
-                                        <Typography color="secondary" ml={2} sx={{ alignSelf: "center" }}>
-                                            {fileSelected ? fileSelected?.fileName : privilege.imageName}
-                                            {<img src={CheckCircle} width={12} height={12} />}
-                                        </Typography>
-                                    }
+                                <TestWithStar title="Price" />
+                                <Grid item xs spacing={2}>
+                                    <Controller
+                                        name="Price"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) =>
+                                            <TextFieldCustom
+                                                {...field}
+                                                onKeyPress={(event) => {
+                                                    if (!/[0-9]/.test(event.key)) {
+                                                        event.preventDefault();
+                                                    }
+                                                }}
+                                                id="price-input"
+                                                size="small"
+                                                placeholder="0"
+                                                value={field.value.toString().replace(/^0+/, '')}
+                                                variant="outlined"
+                                                inputProps={{ style: { textAlign: 'right', width: '9.5rem' } }}
+                                            />}
+                                    />
+                                    <Controller
+                                        name="TokenType"
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) =>
+                                            <TextFieldCustom
+                                                {...field}
+                                                sx={{ '& > :not(style)': { height: '2.5rem', fontSize: "1rem", ml: '1rem' } }}
+                                                id="outlined-select-currency"
+                                                select
+                                                value={coin}
+                                                onChange={handleCoinChange}
+                                                InputProps={{
+                                                    startAdornment: (
+                                                        <Logo coin={coin} />
+                                                    ),
+                                                }}
+                                            >
+                                                {coins.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))}
+                                            </TextFieldCustom>}
+                                    />
                                 </Grid>
                             </Grid>
                             <Grid item>

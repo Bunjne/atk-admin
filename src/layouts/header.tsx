@@ -81,14 +81,16 @@ export default function Header(props: { page: number, setPage: any }) {
     }, [])
 
     const navigate = useNavigate();
+
     function toHomePage(pageNumber: number) {
-        if (pageNumber === 0) {
+        if (props.page === 0) {
             window.location.reload();
         } else {
             props.setPage(pageNumber);
             navigate(allTabs[pageNumber], { replace: true });
         }
     }
+
     return (
         <Grid sx={{ width: 1 }}>
             <Grid container flexDirection={"row"} sx={{ pl: "3rem", pr: "1rem", py: '0.5rem', my: 1 }} alignItems={"center"}>

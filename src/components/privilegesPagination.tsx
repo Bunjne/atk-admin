@@ -20,6 +20,7 @@ import { DeleteModal } from '../routes/CreateMarketPlace';
 import MessageAlert from './shares/messageAlert';
 import ClipLoader from "react-spinners/ClipLoader";
 import '../assets/text.css';
+import { GetTokenType, TokenType } from '../enums/tokenType';
 
 
 interface PrivilegeItemProp {
@@ -55,6 +56,11 @@ const PrivilegeItem = ({ privilege, onUpdateClicked, onDeleteClicked }: Privileg
         onDeleteClicked(e, privilege.id);
     }
 
+    const color = GetTokenType(privilege.tokenType) === TokenType.ACADEMIC ? Colors.Yellow : Colors.PrimaryColor;
+    privilege.imageName = privilege.imageName ?? "";
+    const splitedUrlName = privilege.imageName.split(".");
+    const isPng = splitedUrlName[splitedUrlName.length - 1] === "png";
+
     return (
         <Grid item container columnSpacing={2} columns={12} mt={'0.5rem'}>
             <Grid item alignSelf={"center"}>
@@ -65,11 +71,13 @@ const PrivilegeItem = ({ privilege, onUpdateClicked, onDeleteClicked }: Privileg
                 </IconButton>
             </Grid>
             <Grid item>
-                {privilege.imageUrl !== ""
+                {(privilege.imageUrl !== "" && isPng)
                     ?
-                    <img src={privilege.imageUrl} width={74} height={74} style={{ backgroundColor: 'transparent', borderRadius: 8 }} />
-                    :
-                    <Paper sx={{ backgroundColor: Colors.Yellow, p: '1rem', pb: '0.4rem', borderRadius: 2, boxShadow: 'none' }}><img src={PrivilegePlaceholder} width={44} height={44} style={{ backgroundColor: 'transparent' }} /></Paper>
+                    <Paper sx={{ backgroundColor: color, p: '1rem', pb: '0.4rem', borderRadius: 2, boxShadow: 'none' }}><img src={privilege.imageUrl} width={44} height={44} style={{ backgroundColor: 'transparent' }} /></Paper>
+                    : (privilege.imageUrl !== "" && !isPng) ?
+                        <img src={privilege.imageUrl} width={74} height={74} style={{ backgroundColor: 'transparent', borderRadius: 8 }} />
+                        :
+                        <Paper sx={{ backgroundColor: color, p: '1rem', pb: '0.4rem', borderRadius: 2, boxShadow: 'none' }}><img src={PrivilegePlaceholder} width={44} height={44} style={{ backgroundColor: 'transparent' }} /></Paper>
                 }
             </Grid>
             <Grid item xs={5} sm container flexDirection={"column"}>

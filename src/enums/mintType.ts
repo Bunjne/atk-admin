@@ -1,19 +1,19 @@
 export enum MintType {
-    INITIAL = "INITIAL",
+    SEMESTERLY = "SEMESTERLY",
     VOTE = "VOTE",
-    TEACHER = "TEACHER",
-    CLUB = "CLUB"
+    LECTURER = "LECTURER",
+    ORGANIZATION = "ORGANIZATION"
 }
 
 export function GetMintType(type: number): string {
     if (type === 1) {
-        return MintType.INITIAL
+        return MintType.SEMESTERLY
     } else if (type === 2) {
         return MintType.VOTE
     } else if (type === 3) {
-        return MintType.TEACHER
+        return MintType.LECTURER
     } else if (type === 4) {
-        return MintType.CLUB
+        return MintType.ORGANIZATION
     }
 
     return ""

@@ -281,18 +281,18 @@ function Marketplace({ handleClose, setAlertStatus }: MarketpalceProp) {
     const onSubmit = (data: any) => {
         const privilege: Privilege = {
             name: data.Name,
-            price: data.Price,
+            price: parseInt(data.Price),
             tokenType: coin,
             description: data.Description,
-            lifeTimeInDay: isExpiryEnable ? data.LifeTimeInDay : null,
-            maxSupply: isMaxSupplyEnable ? data.MaxSupply : null,
+            lifeTimeInDay: isExpiryEnable ? parseInt(data.LifeTimeInDay) : null,
+            maxSupply: isMaxSupplyEnable ? parseInt(data.MaxSupply) : null,
             maxSupplyType: isMaxSupplyEnable ? maxSupplyType : null,
-            amountPerStudent: isMaxPerStudentEnable ? data.AmountPerStudent : null,
+            amountPerStudent: isMaxPerStudentEnable ? parseInt(data.AmountPerStudent) : null,
             amountPerStudentType: isMaxPerStudentEnable ? amountPerStudentType : null,
             isDeleted: false
         }
 
-        console.log(fileSelected)
+        console.log(privilege)
         if (fileSelected) {
             const formData = new FormData();
             formData.append('image', fileSelected!.file, fileSelected!.fileName);

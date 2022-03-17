@@ -13,6 +13,7 @@ export default function CoinInfoItem(props: Props) {
     const price = props.price.toLocaleString(undefined, { maximumFractionDigits: 2 });
     const title = props.title;
     const tokenPrice = price + " " + props.type;
+
     return (
         <Stack direction="row" justifyContent={"space-between"} alignItems="center">
             <Stack direction="row" alignItems="center" spacing={1}>

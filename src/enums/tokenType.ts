@@ -4,9 +4,9 @@ export enum TokenType {
 }
 
 export function GetTokenType(type: string): string {
-    if (type.toLocaleLowerCase() == "academic") {
+    if (type.toLocaleLowerCase() == "academic" || type.toLocaleLowerCase() == "aca") {
         return TokenType.ACADEMIC
-    } else if (type.toLocaleLowerCase() == "lifestyle") {
+    } else if (type.toLocaleLowerCase() == "lifestyle" || type.toLocaleLowerCase() == "lif") {
         return TokenType.LIFESTYLE
     }
 
